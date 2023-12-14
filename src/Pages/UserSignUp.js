@@ -19,20 +19,23 @@ const UserSignUp = () => {
     });
   };
 
-  const addUserHandler = (userData) => {
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/user/signup`, userData)
-      .then((result) => {
-        if (result.status === 200) {
-          userAlert();
-        } else {
-          navigate("");
-        }
-      })
-      .catch((error) => {
-        setError(error.response.data);
-      });
-  };
+ const addUserHandler = (userData) => {
+  console.log('Starting addUserHandler');
+  axios
+    .post(`https://chatbox-project-final.onrender.com/user/signup`, userData)
+    .then((result) => {
+      console.log('Request successful', result);
+      if (result.status === 200) {
+        userAlert();
+      } else {
+        navigate("");
+      }
+    })
+    .catch((error) => {
+      console.error('Error in addUserHandler', error);
+      setError(error.response?.data || { message: 'An error occurred' });
+    });
+};
 
   return (
     <>
